@@ -13,6 +13,15 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     game.over(false, effects.dissolve)
 })
+function play_melody (tempo: number) {
+    music.playMelody("C - C C D C C - ", tempo)
+    music.playMelody("C F F - D C C - ", tempo)
+    music.playMelody("C - C C D C C - ", tempo)
+    music.playMelody("C F F - D C C - ", tempo)
+    music.playMelody("C - C C D C C - ", tempo)
+    music.playMelody("C F A A C - C - ", tempo)
+}
+let tempo = 0
 let projectile: Sprite = null
 let mySprite: Sprite = null
 let spacecraft_right: Image = null
@@ -85,11 +94,15 @@ sprites.space.spaceSmallAsteroid2
 ]
 mySprite.setFlag(SpriteFlag.StayInScreen, true)
 mySprite.bottom = scene.screenHeight()
-controller.moveSprite(mySprite, 150, 150)
+controller.moveSprite(mySprite, 175, 175)
 info.setScore(0)
 effects.starField.startScreenEffect()
 game.onUpdateInterval(400, function () {
-    projectile = sprites.createProjectileFromSide(asteroids[randint(0, asteroids.length - 1)], 0, randint(100, 200))
+    projectile = sprites.createProjectileFromSide(asteroids[randint(0, asteroids.length - 1)], randint(-10, 10), randint(100, 200))
     projectile.x = randint(0, scene.screenWidth())
     info.changeScoreBy(1)
+})
+forever(function () {
+    tempo = 370
+    play_melody(tempo)
 })
