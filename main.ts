@@ -11,7 +11,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(spacecraft_right)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
-    otherSprite.destroy(effects.ashes, 500)
+    otherSprite.destroy(effects.spray, 500)
     info.changeLifeBy(-1)
 })
 info.onLifeZero(function () {
